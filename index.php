@@ -1,3 +1,3 @@
 <?php
 
-echo '<h1>Welcome</h1>';
+require './views/main.html';
