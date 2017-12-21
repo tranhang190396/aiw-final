@@ -9,7 +9,7 @@
 					<span class="icon-bar"></span>
 					<span class="icon-bar"></span>
 				</button>
-                <a class="navbar-brand" href="index.html"><span>News</span></a>
+                <a class="navbar-brand" href="/"><span>News</span></a>
             </div>
             <div class="navbar-collapse collapse">
                 <div class="menu">

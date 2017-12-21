@@ -1,25 +1,68 @@
-const { el, mount } = redom;
+const { el, mount } = redom
 
 window.onload = () => {
-    getArticles( function(res) {
-        printArticles(res);
-    } );
-
-    getArticleById(1, function(res) {
-        printArticles(res);
-    });
-
+    renderMainView();
+    attachListeners();    
 }
 
-function printArticles( articles )
+function renderMainView()
 {
-    console.log(articles);
-    // create articles here by call createArticle()
-    // append into <main></main> by select document by id = main, then append by jquery
+    get('/api/article', function (articles) {
+        get('/api/image', function (images) {
+            console.log(images)
+            console.log(articles)
+        })
+    }) 
 }
 
-function createArticle( slides, article )
+function renderCategoryView( categoryId )
 {
+    // get articles by category_id
+    // update view
+}
+
+function renderArticleView( articleId )
+{
+    // get article by id
+    // get related article
+    // get tags 
+    // update view
+}
+
+function renderTagView( tagId )
+{
+    // get article by tag_id
+    // update view
+}
+
+function attachListeners()
+{
+    let fashion = 1
+    let discovery = 2
+    let music = 3
+    let cinema = 4
+    let world = 5
+    $('#category-music').click(function () {
+        renderCategoryView(music)
+    })
+    $('#category-cinema').click(function () {
+        renderCategoryView(cinema)
+    })
+    $('#category-world').click(function () {
+        renderCategoryView(world)
+    })
+    $('#category-discovery').click(function () {
+        renderCategoryView(discovery)
+    })
+    $('#category-fashion').click(function () {
+        renderCategoryView(fashion)
+    })
+}
+
+//===================================================
+function createArticleItem( slides, article )
+{
+    // create an article item in 
     return el('div.blog', [
         el('h5', 'feb 2017'),
         el('img.img-responsive', {'src': 'image_path'}),
@@ -29,6 +72,18 @@ function createArticle( slides, article )
         el ('div.ficon', el('a', 'Author'))
     ])
 }
+
+function createRowArticleItem( article_1, article_2 )
+{
+
+}
+//====================================================
+
+function createArticle( slides, article )
+{
+    // create a specific article view
+}
+
 function createSlides( images )
 {
     return el('div.slider', [
@@ -40,61 +95,9 @@ function createSlides( images )
     ])
 }
 
-function getArticles( cb )
-{
-    makeRequest('api/article', cb);
-}
-
-function getArticleById( articleId, cb )
-{
-    makeRequest('/api/article?id=' + articleId, cb);
-} 
-
-function getArticlesByCategory( categoryId, cb )
-{
-    makeRequest('/api/article?category=' + categoryId, cb);
-}
-
-function getArticlesByTag( tagId, cb )
-{
-    makeRequest('/api/article?tag=' + tagId, cb);
-}
-
-function getCategories( cb )
-{
-    makeRequest('/api/category', cb);
-}
-
-function getCategoryById( categoryId, cb )
-{
-    makeRequest('/api/category?id=' + categoryId);
-}
-
-function getImages( cb )
-{
-
-}
-
-function getImageById( imageId , cb)
-{
-
-}
-
-function getImagesByArticle( articleId, cb)
-{
-
-}
-
-function getTags( cb )
-{
-
-}
-
-function getTagById( cb )
-{
-
-}
-
-function makeRequest( url, cb) {
-    fetch(url).then(res => res.json()).then(res => cb(res));
+// helper method
+function get( url, callback ) {
+    fetch(url)
+    .then(res => res.json())
+    .then(res => callback(res));
 }
