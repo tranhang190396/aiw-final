@@ -1,0 +1,27 @@
+{
+  "name": "aiw-final-project",
+  "version": "1.0.0",
+  "description": "a simple restAPI which serves local news, powered by Express.js",
+  "main": "index.js",
+  "scripts": {
+    "start": "nodemon ./index"
+  },
+  "keywords": [
+    "hung",
+    "hang",
+    "aiw",
+    "final",
+    "local",
+    "news"
+  ],
+  "author": "hung, hang",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.16.2",
+    "mysql": "^2.15.0",
+    "semantic-ui": "^2.2.13"
+  },
+  "devDependencies": {
+    "nodemon": "^1.14.3"
+  }
+}
