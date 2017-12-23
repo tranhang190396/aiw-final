@@ -47,4 +47,10 @@ app.get('/api/category_of/:articleId', (req, res) => {
     })
 })
 
+app.get('/api/articles', (req, res) => {
+    resources.getAllArticles(result => {
+        res.json(result)
+    })
+})
+
 app.listen(3000, () => console.log('local news server is running on port 3000'))

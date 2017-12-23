@@ -21,3 +21,6 @@ exports.getCategoryOfArticle = ( articleId ) =>
     from (categories inner join article_category on categories.id = article_category.category_id)
     inner join articles on articles.id = article_category.article_id
     where articles.id = ${articleId}`
+
+exports.getAllArticles = () => 
+    `select * from articles`

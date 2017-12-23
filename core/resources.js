@@ -42,3 +42,10 @@ exports.getCategoryOfArticle = ( articleId, callback ) => {
         (err, result) => callback(result)
     )
 }
+
+exports.getAllArticles = ( callback ) => {
+    connection.query(
+        sqlCode.getAllArticles(),
+        (err, result) => callback(result)
+    )
+}

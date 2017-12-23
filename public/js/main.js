@@ -1,25 +1,25 @@
 
-
-// sample use of mustache
-var template = '<h1>{{title}}</h1><ul>{{#names}}<li>{{name}}</li>{{/names}}</ul>'
-var data = {"title": "Story", "names": [{"name": "Tarzan"}, {"name": "Jane"}]}
-
-var result = Mustache.render(template, data)
-
-document.getElementById('sample').innerHTML = result
-
 // run on first
 window.onload = () => {
 
     attachListener()
-
-    getDetailArticle(1, (article) => {
-        console.log(article)
-    })
     
-    getArticlesByCategory(1, (articles) => {
+    getAllArticles((articles) => {
+        console.log('tất cả 15 cái article:')
         console.log(articles)
     })
+}
+
+sampleTemplate = () => {
+
+    // html template
+    var template = '<h1>{{title}}</h1><ul>{{#names}}<li>{{name}}</li>{{/names}}</ul>'
+    // dữ liệu trả về, xem thêm cấu trúc ở trong firefox console (Ctrl + shift + K)
+    var data = {"title": "Story", "names": [{"name": "Tarzan"}, {"name": "Jane"}]}
+    // render (nhét :|) data vào trong template
+    var result = Mustache.render(template, data)
+    // thay cái content của main bằng result
+    document.getElementById('sample').innerHTML = result
 }
 
 // attach listener into menu categories
@@ -32,7 +32,7 @@ attachListener = () => {
         the_gioi: 5
     }
     $('#am_nhac').click(() => {
-        console.log('clicked')
+        console.log('articles với category âm nhạc')
         getArticlesByCategory(categories.am_nhac, (articles) => {
             console.log(articles)
             // update view by render 3 items of article in main
@@ -41,6 +41,7 @@ attachListener = () => {
     
     $('#dien_anh').click(() => {
         getArticlesByCategory(categories.dien_anh, (articles) => {
+            console.log('articles với category điện ảnh')
             console.log(articles)
             // update view by render 3 items of article in main
         })
@@ -48,6 +49,7 @@ attachListener = () => {
 
     $('#thoi_trang').click(() => {
         getArticlesByCategory(categories.thoi_trang, (articles) => {
+            console.log('articles với category thời trang')
             console.log(articles)
             // update view by render 3 items of article in main
         })
@@ -55,12 +57,14 @@ attachListener = () => {
 
     $('#kham_pha').click(() => {
         getArticlesByCategory(categories.kham_pha, (articles) => {
+            console.log('articles với category khám phá')
             console.log(articles)
         })
     })
 
     $('#the_gioi').click(() => {
         getArticlesByCategory(categories.the_gioi, (articles) => {
+            console.log('articles với category thế giới')
             console.log(articles)
         })
     })
@@ -95,6 +99,10 @@ getDetailArticle = ( articleId , callback) => {
     })
 }
 
-getArticlesByCategory= ( categoryId, callback ) => {
+getArticlesByCategory = ( categoryId, callback ) => {
     get('/api/category/' + categoryId, res => callback(res))
+}
+
+getAllArticles = ( callback ) => {
+    get('/api/articles', res=> callback(res))
 }
