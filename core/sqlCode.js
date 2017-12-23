@@ -16,3 +16,8 @@ exports.getTagsByArticle = ( articleId ) =>
 exports.getImagesByArticle = ( articleId ) => 
     `select * from images where article_id = ${articleId}`
 
+exports.getCategoryOfArticle = ( articleId ) => 
+    `select categories.id, categories.name
+    from (categories inner join article_category on categories.id = article_category.category_id)
+    inner join articles on articles.id = article_category.article_id
+    where articles.id = ${articleId}`

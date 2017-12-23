@@ -35,3 +35,10 @@ exports.getImagesByArticle = ( articleId, callback ) => {
         (err, result) => callback(result)
     )
 }
+
+exports.getCategoryOfArticle = ( articleId, callback ) => {
+    connection.query(
+        sqlCode.getCategoryOfArticle(articleId),
+        (err, result) => callback(result)
+    )
+}
