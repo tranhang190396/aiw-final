@@ -8,13 +8,61 @@ var result = Mustache.render(template, data)
 
 document.getElementById('sample').innerHTML = result
 
+// run on first
 window.onload = () => {
+
+    attachListener()
+
     getDetailArticle(1, (article) => {
         console.log(article)
     })
     
     getArticlesByCategory(1, (articles) => {
         console.log(articles)
+    })
+}
+
+// attach listener into menu categories
+attachListener = () => {
+    const categories = {
+        am_nhac: 3,
+        thoi_trang: 1,
+        dien_anh: 4,
+        kham_pha: 2,
+        the_gioi: 5
+    }
+    $('#am_nhac').click(() => {
+        console.log('clicked')
+        getArticlesByCategory(categories.am_nhac, (articles) => {
+            console.log(articles)
+            // update view by render 3 items of article in main
+        })
+    })
+    
+    $('#dien_anh').click(() => {
+        getArticlesByCategory(categories.dien_anh, (articles) => {
+            console.log(articles)
+            // update view by render 3 items of article in main
+        })
+    })
+
+    $('#thoi_trang').click(() => {
+        getArticlesByCategory(categories.thoi_trang, (articles) => {
+            console.log(articles)
+            // update view by render 3 items of article in main
+        })
+    })
+
+    $('#kham_pha').click(() => {
+        getArticlesByCategory(categories.kham_pha, (articles) => {
+            console.log(articles)
+        })
+    })
+
+    $('#the_gioi').click(() => {
+        getArticlesByCategory(categories.the_gioi, (articles) => {
+            console.log(articles)
+        })
     })
 }
 
