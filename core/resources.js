@@ -8,35 +8,30 @@ const connection = mysql.createConnection({
 })
 connection.connect()
 
-
 exports.getArticleByCategory = ( categoryId, callback ) => {
 
-    let sql = sqlCode.getArticlesByCategory( categoryId )
-
-    connection.query(sql, (err, rows) => {
-        if (err) throw err
-        return callback(rows)
-    })
+    connection.query(
+        sqlCode.getArticlesByCategory(categoryId), 
+        (err, result) => callback(result)
+    )
 }
-
-
-exports.getCategories = ( callback ) => {
-
-    let sql = sqlCode.getCategories()
-
-    connection.query(sql, (err, rows) => {
-        if (err) throw err
-        return callback(rows)
-    })
-}
-
 
 exports.getDetailArticle = ( articleId, callback ) => {
 
-    let sql = sqlCode.getDetailArticle(articleId)
+    connection.query(
+        sqlCode.getArticleDetail(articleId), 
+        (err, result) => callback(result))
+}
 
-    connection.query(sql, (err, rows) => {
-        if (err) throw err
-        return callback(rows)
-    })
+exports.getTagsByArticle = ( articleId, callback ) => {
+    connection.query(
+        sqlCode.getTagsByArticle(articleId), 
+        (err, result) => callback(result))
+}
+
+exports.getImagesByArticle = ( articleId, callback ) => {
+    connection.query(
+        sqlCode.getImagesByArticle(articleId),
+        (err, result) => callback(result)
+    )
 }

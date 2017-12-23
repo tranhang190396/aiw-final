@@ -1,11 +1,18 @@
 exports.getArticlesByCategory  = ( categoryId ) => 
-    `select articles.*
+    `select articles.id, articles.title, articles.intro_image
     from ( articles inner join article_category on articles.id = article_category.article_id)
     inner join categories on categories.id = article_category.category_id
     where categories.id = ${categoryId};`
 
-exports.getDetailArticle = ( articleId ) =>
-    `select * from articles`
+exports.getArticleDetail = ( articleId ) => 
+    `select * from articles where id = ${articleId}`
 
-exports.getCategories = () => 
-    `select * from categories`
+exports.getTagsByArticle = ( articleId ) => 
+    `select tags.id, tags.name
+    from ( tags inner join article_tag on tags.id = article_tag.tag_id)
+    inner join articles on articles.id = article_tag.article_id
+    where articles.id = ${articleId}`
+
+exports.getImagesByArticle = ( articleId ) => 
+    `select * from images where article_id = ${articleId}`
+
