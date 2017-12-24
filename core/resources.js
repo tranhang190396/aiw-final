@@ -8,7 +8,12 @@ const connection = mysql.createConnection({
 })
 connection.connect()
 
-exports.getArticleByCategory = ( categoryId, callback ) => {
+/**
+ * Get all articles of a category by category id
+ * @param categoryId: string
+ * @param callback: fn
+ */
+exports.getArticlesByCategory = ( categoryId, callback ) => {
 
     connection.query(
         sqlCode.getArticlesByCategory(categoryId), 
@@ -16,6 +21,11 @@ exports.getArticleByCategory = ( categoryId, callback ) => {
     )
 }
 
+/**
+ * Get a detail of an article by article id
+ * @param articleId: string
+ * @param callback: fn
+ */
 exports.getDetailArticle = ( articleId, callback ) => {
 
     connection.query(
@@ -23,12 +33,22 @@ exports.getDetailArticle = ( articleId, callback ) => {
         (err, result) => callback(result))
 }
 
+/**
+ * Get all tags of an article by article id
+ * @param articleId: string
+ * @param callback: fn
+ */
 exports.getTagsByArticle = ( articleId, callback ) => {
     connection.query(
         sqlCode.getTagsByArticle(articleId), 
         (err, result) => callback(result))
 }
 
+/**
+ * Get all images of an article by article id
+ * @param articleId: string 
+ * @param callback: fn
+ */
 exports.getImagesByArticle = ( articleId, callback ) => {
     connection.query(
         sqlCode.getImagesByArticle(articleId),
@@ -36,6 +56,11 @@ exports.getImagesByArticle = ( articleId, callback ) => {
     )
 }
 
+/**
+ * Get a category of an article by article id
+ * @param articleId: string
+ * @param callback: fn
+ */
 exports.getCategoryOfArticle = ( articleId, callback ) => {
     connection.query(
         sqlCode.getCategoryOfArticle(articleId),
@@ -43,6 +68,10 @@ exports.getCategoryOfArticle = ( articleId, callback ) => {
     )
 }
 
+/**
+ * Get all articles
+ * @param callback: fn
+ */
 exports.getAllArticles = ( callback ) => {
     connection.query(
         sqlCode.getAllArticles(),

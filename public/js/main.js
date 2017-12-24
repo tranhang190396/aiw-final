@@ -70,12 +70,13 @@ attachListener = () => {
     })
 }
 
-// helper
+// request helper
 get = ( url, callback ) => {
     fetch(url)
     .then(res => res.json())
     .then(res => callback(res))
 }
+
 // request for api: some how end up using callback hell =)))
 getDetailArticle = ( articleId , callback) => {
     let article = {}
