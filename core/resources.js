@@ -78,6 +78,11 @@ exports.getAllArticles = ( callback ) => {
     )
 }
 
+/**
+ * Get all comments of an article by article id
+ * @param articleId: string 
+ * @param callback: fn
+ */
 exports.getCommentsByArticle = ( articleId, callback ) => {
     connection.query(
         sqlCode.getCommentsByArticle(articleId),
@@ -85,12 +90,29 @@ exports.getCommentsByArticle = ( articleId, callback ) => {
     )
 }
 
+/**
+ * Add a comment 
+ * @param comment: obj 
+ */
 exports.addComment = ( comment ) => {
     connection.query(
         sqlCode.addComment(comment),
         (err, result) => {
             if (err) throw err;
-            console.log(result)
+        }
+    )
+}
+
+/**
+ * Get all articles of a tag by tag id
+ * @param tagId: string 
+ */
+exports.getArticlesByTag = ( tagId, callback ) => {
+    connection.query(
+        sqlCode.getArticlesByTag(tagId),
+        (err, result) => {
+            if (err) throw err;
+            callback(result)
         }
     )
 }

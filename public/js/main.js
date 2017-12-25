@@ -53,10 +53,6 @@ attachListener = () => {
     })
 }
 
-attachBtnListener = () => {
-    
-}
-
 // request helper
 get = ( url, callback ) => {
     fetch(url)
@@ -144,7 +140,6 @@ renderMainView = ( articles ) => {
             view.append( articleComp(article) )
             // add listener to link and button
             $('.related').click(function() {
-                console.log($(this).attr('id'))
                 getDetailArticle($(this).attr('id'), (article) => {
                     view.empty()
                     view.append( articleComp(article) )
@@ -154,14 +149,18 @@ renderMainView = ( articles ) => {
             })
 
             // add tag listener
-            
+            $('.tags').click(function() {
+                let link = '/api/' + $(this).attr('id') 
+                get(link, (articles) => {
+                    renderMainView(articles)
+                })
+            })
         })
     })
 }
 
 addLinkListener = (view) => {
     $('.related').click(function() {
-        console.log($(this).attr('id'))
         getDetailArticle($(this).attr('id'), (article) => {
             view.empty()
             view.append( articleComp(article) )
@@ -220,14 +219,13 @@ tagComp = (tags) => {
 
 tagItem = (tag) => {
     return Mustache.render(`
-    <button class="ui button">
-    <a href="#" id="tag-${tag.id}" class='tags'>${tag.name}</a>
+    <button class="ui button tags" id="tag/${tag.id}">
+    <a href="#">${tag.name}</a>
     </button>
     `, tag)
 }
 
 commentComp = (comments) => {
-    console.log(comments)
     let result = 
     `<div class="ui comments">
     <h3 class="ui dividing header">Comments</h3>`
@@ -268,7 +266,6 @@ commentItem = (comment) => {
 }
 
 articleComp = (article) => {
-    console.log( commentComp(article.comments) )
     return metaComp(article.article.title, article.article.intro, article.article.created)
         + slideComp(article.images)
         + mainComp(article.article.content, article.article.author)

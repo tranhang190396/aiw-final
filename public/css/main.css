@@ -1,12 +1,22 @@
 main {
-    margin-top: 120px;
-    margin-bottom: 50px;
+  margin-top: 120px;
+  margin-bottom: 50px;
 }
 
 .read-more {
-    color: red !important;
+  color: red !important;
 }
 
 #slides {
-    display:none;
-  }
+  display: none;
+}
+
+.mySlides {
+  display: none;
+}
+
+
+#slideshow {
+    height:400px;
+    width: 800px;
+}

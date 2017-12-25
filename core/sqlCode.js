@@ -31,3 +31,9 @@ exports.getCommentsByArticle = ( articleId ) =>
 exports.addComment = ( comment ) => 
     `insert into comments (email, content, article_id)
     values ("${comment.email}", "${comment.content}", ${comment.article_id});`
+
+exports.getArticlesByTag = ( tagId ) => 
+    `select articles.id, articles.title, articles.intro_image, articles.intro
+    from ( articles inner join article_tag on articles.id = article_tag.article_id)
+    inner join tags on tags.id = article_tag.tag_id
+    where tags.id = ${tagId};`

@@ -23,6 +23,14 @@ app.use(express.static(path.join(__dirname, 'public')))
  *  Route export API, accesible public
  */
 
+
+// get all articles by tag_id
+app.get('/api/tag/:tagId', (req, res) => {
+    resources.getArticlesByTag(req.params.tagId, result => {
+        res.json(result)
+    })
+})
+
 // get all articles by a specific category id
 app.get('/api/category/:categoryId', (req, res) => {
     resources.getArticlesByCategory(req.params.categoryId, result => {
@@ -65,11 +73,14 @@ app.get('/api/articles', (req, res) => {
         res.json(result)
     })
 })
+
+// add a comment
 app.get('/api/add_comment', (req, res) => {
     resources.addComment(req.query)
     res.send(null)
 })
 
+// get all comments of a specific article by article_id
 app.get('/api/comment/:articleId', (req, res) => {
     resources.getCommentsByArticle(req.params.articleId, result => {
         res.json(result)
