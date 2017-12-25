@@ -105,8 +105,8 @@ renderArticle = ( article ) => {
             </div>
         </div>
         <div class="extra content">
-            <button class="ui inverted red button">
-                <a href="#" id="article-${article.id}" class='read-more'>Read more</a>
+            <button class="ui inverted red button read-more" id="${article.id}">
+                <a href="#">Read more</a>
             </button>
         </div>
     </div>
@@ -126,4 +126,12 @@ renderMainView = ( articles ) => {
     {
         view.append( renderArticle(article) )
     }
+
+    $('.read-more').click(function() {
+        let articleId = $(this).attr('id') 
+        getDetailArticle(articleId, (article) => {
+            console.log(article)
+            // render article detail view here
+        })
+    })
 }
