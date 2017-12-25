@@ -1,5 +1,5 @@
 exports.getArticlesByCategory  = ( categoryId ) => 
-    `select articles.id, articles.title, articles.intro_image
+    `select articles.id, articles.title, articles.intro_image, articles.intro
     from ( articles inner join article_category on articles.id = article_category.article_id)
     inner join categories on categories.id = article_category.category_id
     where categories.id = ${categoryId};`

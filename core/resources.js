@@ -14,7 +14,6 @@ connection.connect()
  * @param callback: fn
  */
 exports.getArticlesByCategory = ( categoryId, callback ) => {
-
     connection.query(
         sqlCode.getArticlesByCategory(categoryId), 
         (err, result) => callback(result)

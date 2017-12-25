@@ -1,7 +1,15 @@
 main {
-    margin-top: 90px;
+    margin-top: 120px;
+    margin-bottom: 50px;
 }
 
+.read-more {
+    color: red !important;
+}
+
+<<<<<<< HEAD
 #slides {
     display:none;
   }
+=======
+>>>>>>> 938918a3a2bed5069fc01401adc19865e0e5d56c
