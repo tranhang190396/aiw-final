@@ -2,6 +2,6 @@ main {
     margin-top: 90px;
 }
 
-#read-more {
-    color: #bfbfc0;
-}
+#slides {
+    display:none;
+  }
