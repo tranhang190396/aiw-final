@@ -1,7 +1,9 @@
 main {
-    margin-top: 90px;
+    margin-top: 120px;
+    margin-bottom: 50px;
 }
 
-#read-more {
-    color: #bfbfc0;
+.read-more {
+    color: red !important;
 }
+

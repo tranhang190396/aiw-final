@@ -5,21 +5,8 @@ window.onload = () => {
     attachListener()
     
     getAllArticles((articles) => {
-        console.log('tất cả 15 cái article:')
-        console.log(articles)
+        renderMainView(articles)
     })
-}
-
-sampleTemplate = () => {
-
-    // html template
-    var template = '<h1>{{title}}</h1><ul>{{#names}}<li>{{name}}</li>{{/names}}</ul>'
-    // dữ liệu trả về, xem thêm cấu trúc ở trong firefox console (Ctrl + shift + K)
-    var data = {"title": "Story", "names": [{"name": "Tarzan"}, {"name": "Jane"}]}
-    // render (nhét :|) data vào trong template
-    var result = Mustache.render(template, data)
-    // thay cái content của main bằng result
-    document.getElementById('sample').innerHTML = result
 }
 
 // attach listener into menu categories
@@ -32,40 +19,34 @@ attachListener = () => {
         the_gioi: 5
     }
     $('#am_nhac').click(() => {
-        console.log('articles với category âm nhạc')
         getArticlesByCategory(categories.am_nhac, (articles) => {
-            console.log(articles)
-            // update view by render 3 items of article in main
+            renderMainView(articles)
         })
     })
     
     $('#dien_anh').click(() => {
         getArticlesByCategory(categories.dien_anh, (articles) => {
-            console.log('articles với category điện ảnh')
-            console.log(articles)
+            renderMainView(articles)
             // update view by render 3 items of article in main
         })
     })
 
     $('#thoi_trang').click(() => {
         getArticlesByCategory(categories.thoi_trang, (articles) => {
-            console.log('articles với category thời trang')
-            console.log(articles)
+            renderMainView(articles)
             // update view by render 3 items of article in main
         })
     })
 
     $('#kham_pha').click(() => {
         getArticlesByCategory(categories.kham_pha, (articles) => {
-            console.log('articles với category khám phá')
-            console.log(articles)
+            renderMainView(articles)
         })
     })
 
     $('#the_gioi').click(() => {
         getArticlesByCategory(categories.the_gioi, (articles) => {
-            console.log('articles với category thế giới')
-            console.log(articles)
+            renderMainView(articles)
         })
     })
 }
@@ -106,4 +87,43 @@ getArticlesByCategory = ( categoryId, callback ) => {
 
 getAllArticles = ( callback ) => {
     get('/api/articles', res=> callback(res))
+}
+
+renderArticle = ( article ) => {
+    return Mustache.render(`
+    <div class="card red">
+        <div class="image">
+            <img src="/${article.intro_image}">
+        </div>
+        <div class="content">
+            <div class="header">${article.title}</div>
+            <div class="meta">
+                <a>${article.author}</a>
+            </div>
+            <div class="description">
+            ${article.intro}
+            </div>
+        </div>
+        <div class="extra content">
+            <button class="ui inverted red button">
+                <a href="#" id="article-${article.id}" class='read-more'>Read more</a>
+            </button>
+        </div>
+    </div>
+    `, article)
+}
+
+
+renderMainView = ( articles ) => {
+    // select view
+    let view = $('#articles-container')
+
+    // refresh view
+    view.empty()
+
+    // inject article components into view
+    for (let article of articles)
+    {
+        view.append( renderArticle(article) )
+    }
 }

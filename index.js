@@ -19,6 +19,7 @@ app.use(express.static(path.join(__dirname, 'public')))
 // get all articles by a specific category id
 app.get('/api/category/:categoryId', (req, res) => {
     resources.getArticlesByCategory(req.params.categoryId, result => {
+        console.log(result)
         res.json(result)
     })
 })
