@@ -73,7 +73,10 @@ getDetailArticle = ( articleId , callback) => {
                         // randomly remove 1 article
                         res.splice([Math.floor(Math.random() * 3) + 1], 1)
                         article.related = res
-                        return callback(article)
+                        get('/api/comment/' + articleId, res => {
+                            article.comments = res
+                           return callback(article)
+                        })
                     }) 
                 })
             })

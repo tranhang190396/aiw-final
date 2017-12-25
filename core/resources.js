@@ -77,3 +77,21 @@ exports.getAllArticles = ( callback ) => {
         (err, result) => callback(result)
     )
 }
+
+exports.getCommentsByArticle = ( articleId, callback ) => {
+    connection.query(
+        sqlCode.getCommentsByArticle(articleId),
+        (err, result) => callback(result)
+    )
+}
+
+exports.addComment = ( comment ) => {
+    connection.query(
+        sqlCode.addComment(comment),
+        (err, result) => {
+            if (err) throw err;
+            console.log(result)
+        }
+    )
+    console.log("sql execute: " + sqlCode.addComment(comment))
+}

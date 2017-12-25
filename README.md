@@ -6,3 +6,5 @@
 * /api/tags/{articleId}: get all tags of an article (based on articles's id)
 * /api/category_of/{articleId}: get a category of an article (based on article's id)
 * /api/articles: get all articles
+* /api/add_comment?email=...&content=...&article_id=...: add a comment
+* /api/comment/{articleId}: get all comment of an article (basd on article's id)

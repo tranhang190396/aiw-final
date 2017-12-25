@@ -24,3 +24,10 @@ exports.getCategoryOfArticle = ( articleId ) =>
 
 exports.getAllArticles = () => 
     `select * from articles`
+
+exports.getCommentsByArticle = ( articleId ) =>
+    `select * from comments where article_id = ${articleId}` 
+
+exports.addComment = ( comment ) => 
+    `insert into comments (email, content, article_id)
+    values ("${comment.email}", "${comment.content}", ${comment.article_id});`

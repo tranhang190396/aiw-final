@@ -1,6 +1,8 @@
 // modules
 const express = require('express')
 const resources = require('./core/resources')
+const bodyParser = require('body-parser')
+
 
 // required packages
 let path = require('path')
@@ -8,9 +10,14 @@ let path = require('path')
 // application instance
 let app = express()
 
+// parse application/x-www-form-urlencoded
+app.use(bodyParser.urlencoded({ extended: false }))
+
+// parse application/json
+app.use(bodyParser.json())
+
 // setup static asset folder
 app.use(express.static(path.join(__dirname, 'public')))
-
 
 /**
  *  Route export API, accesible public
@@ -58,6 +65,17 @@ app.get('/api/articles', (req, res) => {
         res.json(result)
     })
 })
+app.get('/api/add_comment', (req, res) => {
+    resources.addComment(req.query)
+    res.send(null)
+})
+
+app.get('/api/comment/:articleId', (req, res) => {
+    resources.getCommentsByArticle(req.params.articleId, result => {
+        res.json(result)
+    })
+})
+
 
 // start the application (chaneling)
 app.listen(3000, () => console.log('local news server is running on port 3000'))
