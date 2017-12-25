@@ -7,7 +7,6 @@ const connection = mysql.createConnection({
     database: 'local_news'
 })
 connection.connect()
-
 /**
  * Get all articles of a category by category id
  * @param categoryId: string
@@ -72,6 +71,7 @@ exports.getCategoryOfArticle = ( articleId, callback ) => {
  * @param callback: fn
  */
 exports.getAllArticles = ( callback ) => {
+    
     connection.query(
         sqlCode.getAllArticles(),
         (err, result) => callback(result)
@@ -93,5 +93,4 @@ exports.addComment = ( comment ) => {
             console.log(result)
         }
     )
-    console.log("sql execute: " + sqlCode.addComment(comment))
 }
