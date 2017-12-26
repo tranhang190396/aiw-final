@@ -30,3 +30,7 @@ main {
 .glide__slide {
   padding-left: 30px !important;
 }
+
+.glide__track {
+  height: 300px !important;
+}

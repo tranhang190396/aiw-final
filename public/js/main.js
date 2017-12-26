@@ -121,6 +121,8 @@ renderMainView = articles => {
   // select view
   let view = $("#articles-container");
 
+  console.log($("#articles-container"));
+
   // refresh view
   view.empty();
 
@@ -144,7 +146,7 @@ renderMainView = articles => {
       $(".related").click(function() {
         getDetailArticle($(this).attr("id"), article => {
           mainView.empty();
-          mainVview.append(articleComp(article));
+          mainView.append(articleComp(article));
           // dirty loop back
           console.log("glide: " + $("#Glide"));
           $("#Glide").glide({
@@ -157,7 +159,14 @@ renderMainView = articles => {
       // add tag listener
       $(".tags").click(function() {
         let link = "/api/" + $(this).attr("id");
+        console.log(link);
         get(link, articles => {
+          $("#main").html(`<section class="section">
+          <div class="ui grid container">
+              <div class="ui three stackable cards" id='articles-container'>
+              </div>
+          </div>
+      </section>`);
           renderMainView(articles);
         });
       });
@@ -179,12 +188,13 @@ renderMainView = articles => {
           // get('/api/comment/' + articleId, (comments) => {
 
           // })
+          console.log("added");
           getDetailArticle(articleId, article => {
-            view.empty();
-            view.append(articleComp(article));
+            mainView.empty();
+            mainView.append(articleComp(article));
             // dirty loop back
 
-            addLinkListener(view);
+            addLinkListener(mainView);
           });
         });
       });
