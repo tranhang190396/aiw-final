@@ -133,15 +133,24 @@ renderMainView = articles => {
   $(".read-more").click(function() {
     let articleId = $(this).attr("id");
     getDetailArticle(articleId, article => {
-      view.empty();
-      view.append(articleComp(article));
+      let mainView = $("#main");
+      mainView.empty();
+      mainView.append(articleComp(article));
+      console.log("glide: " + $("#Glide"));
+      $("#Glide").glide({
+        type: "carousel"
+      });
       // add listener to link and button
       $(".related").click(function() {
         getDetailArticle($(this).attr("id"), article => {
-          view.empty();
-          view.append(articleComp(article));
+          mainView.empty();
+          mainVview.append(articleComp(article));
           // dirty loop back
-          addLinkListener(view);
+          console.log("glide: " + $("#Glide"));
+          $("#Glide").glide({
+            type: "carousel"
+          });
+          addLinkListener(mainView);
         });
       });
 
@@ -174,6 +183,7 @@ renderMainView = articles => {
             view.empty();
             view.append(articleComp(article));
             // dirty loop back
+
             addLinkListener(view);
           });
         });
@@ -187,7 +197,6 @@ addLinkListener = view => {
     getDetailArticle($(this).attr("id"), article => {
       view.empty();
       view.append(articleComp(article));
-
       addLinkListener(view);
     });
   });
@@ -207,13 +216,30 @@ metaComp = (title, intro, created) => {
 };
 
 slideComp = images => {
-  return `<h1>SLIDE HEREEEE</h1>`;
+  let slides = `<div class='ui container' style='height:200px'><div id="Glide" class="glide" >
+  <div class="glide__arrows">
+      <button class="glide__arrow prev" data-glide-dir="<">prev</button>
+      <button class="glide__arrow next" data-glide-dir=">">next</button>
+  </div>
+
+  <div class="glide__wrapper">
+      <ul class="glide__track">`;
+  for (let image of images) {
+    slides += `<li class="glide__slide"><img src="/${
+      image.path
+    }" height='400px'></li>`;
+  }
+  slides += `</ul>
+  </div>
+</div></div>`;
+
+  return slides;
 };
 
 mainComp = (content, author) => {
   return Mustache.render(
     `
-    <div class="ui text container">
+    <div class="ui text container" style="margin-top: 200px;">
     <div class="ui inverted section divider"></div>
     <p>${content}</p>
     <p style="text-align:right;"> ${author}</p>
